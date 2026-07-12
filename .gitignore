@@ -1,4 +1,4 @@
-
+.vscode
 movies_metadata.csv
 *.pkl
 .env
