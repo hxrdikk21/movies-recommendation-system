@@ -1,0 +1,6 @@
+
+movies_metadata.csv
+*.pkl
+.env
+__pycache__/
+.ipynb_checkpoints/
