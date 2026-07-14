@@ -7,35 +7,10 @@ from dotenv import load_dotenv
 import requests
 
 st.title('Movie Recommender System')
-def download_file(url, filename):
-    if not os.path.exists(filename):
-        response = requests.get(url, stream=True)
-        with open(filename, 'wb') as f:
-            f.write(response.content)
 
-@st.cache_resource
-def load_assets():
-    # Define your external URLs here
-    files = {
-        "model.pkl": "https://drive.google.com/uc?export=download&id=14eK83XcDmEZnXL0p9mzHSvzIGbGsTBvz",
-        "movies_data.pkl": "https://drive.google.com/uc?export=download&id=13VgIS3QTWW-xhdF_BfqbDUKitJLWcrwD",
-        "tfidf_matrix.pkl": "https://drive.google.com/uc?export=download&id=1OUl5MKuTm0l4FDBsrAPsJP-wu9KpD3s8"
-    }
-    
-    for filename, url in files.items():
-        download_file(url, filename)
-    
-    # Load the files
-    model = pickle.load(open("model.pkl", "rb"))
-    movies_data = pickle.load(open("movies_data.pkl", "rb"))
-    tfidf_matrix = pickle.load(open("tfidf_matrix.pkl", "rb"))
-    
-    return model, movies_data, tfidf_matrix
-
-# Load assets
-model, movies_data, tfidf_matrix = load_assets()
-
-
+model = pickle.load(open("model.pkl", "rb"))
+movies_data = pickle.load(open("movies_data.pkl", "rb"))
+tfidf_matrix = pickle.load(open("tfidf_matrix.pkl", "rb"))
 movies = pd.DataFrame(movies_data)
 
 
