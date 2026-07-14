@@ -10,7 +10,7 @@ st.title('Movie Recommender System')
 
 model = pickle.load(open("model.pkl", "rb"))
 movies_data = pickle.load(open("movies_data.pkl", "rb"))
-tfidf_matrix = pickle.load(open("tfidf_matrix.pkl", "rb"))
+tfidf_matrix = pickle.load(open("tfidf.pkl", "rb"))
 movies = pd.DataFrame(movies_data)
 
 
