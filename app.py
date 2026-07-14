@@ -24,10 +24,20 @@ selected_movie = st.selectbox(
     movies['title'].values
 )
 def fetch_poster(id):
-    url = f"https://api.themoviedb.org/3/movie/{id}?api_key={api_key}"
-    response = requests.get(url)
-    data = response.json()
-    return 'https://image.tmdb.org/t/p/original/' + data['poster_path']
+    url = f"https://api.tmdb.org/3/movie/{id}?api_key={api_key}"
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+    try:
+        response = requests.get(url, headers=headers, timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            poster_path = data.get('poster_path')
+            if poster_path:
+                return 'https://image.tmdb.org/t/p/original/' + poster_path
+    except Exception as e:
+        print(f"Error fetching poster: {e}")
+    return 'https://placehold.co/500x750?text=No+Poster+Available'
 
 
 
